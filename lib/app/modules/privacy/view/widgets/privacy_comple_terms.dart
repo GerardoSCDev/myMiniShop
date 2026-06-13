@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_mini_shop/app/common/design/size/app_size.dart';
 import 'package:my_mini_shop/app/common/design/widgets/app_text/app_text.dart';
+import 'package:my_mini_shop/app/modules/privacy/config/privacy_copies.dart';
 
 class PrivacyCompleTerms extends StatelessWidget {
   const PrivacyCompleTerms({super.key});
@@ -9,29 +10,24 @@ class PrivacyCompleTerms extends StatelessWidget {
   static const Color _borderColor = Color(0xFFBBCABF);
   static const Color _sheetColor = Color(0xFFF8F9FF);
   static const PrivacyTermsContent _termsContent = PrivacyTermsContent(
-    titleTerms: 'Última actualización: Octubre 2023',
-    description:
-        'En Mi Tiendita, valoramos profundamente la confianza que depositas en nosotros al compartir tu información comercial. Este aviso detalla cómo manejamos tus datos.',
+    titleTerms: PrivacyCopies.termsTitle,
+    description: PrivacyCopies.termsDescription,
     points: [
       PrivacyTermPoint(
-        title: '1. Recolección de Datos',
-        description:
-            'Recopilamos información básica sobre tus productos, inventarios y transacciones de venta con el único propósito de proporcionarte herramientas de gestión empresarial eficientes.',
+        title: PrivacyCopies.termsCollectionTitle,
+        description: PrivacyCopies.termsCollectionDescription,
       ),
       PrivacyTermPoint(
-        title: '2. Uso de la Información',
-        description:
-            'Tus datos se utilizan exclusivamente para generar reportes de ventas, alertas de stock bajo y análisis de rendimiento. No compartimos tus datos con terceros para fines comerciales.',
+        title: PrivacyCopies.termsInformationUseTitle,
+        description: PrivacyCopies.termsInformationUseDescription,
       ),
       PrivacyTermPoint(
-        title: '3. Seguridad',
-        description:
-            'Implementamos protocolos de seguridad estándar de la industria para proteger la integridad de tu base de datos contra accesos no autorizados.',
+        title: PrivacyCopies.termsSecurityTitle,
+        description: PrivacyCopies.termsSecurityDescription,
       ),
       PrivacyTermPoint(
-        title: '4. Derechos ARCO',
-        description:
-            'Puedes ejercer tus derechos de Acceso, Rectificación, Cancelación y Oposición en cualquier momento a través de la configuración de tu perfil.',
+        title: PrivacyCopies.termsArcoRightsTitle,
+        description: PrivacyCopies.termsArcoRightsDescription,
       ),
     ],
   );
