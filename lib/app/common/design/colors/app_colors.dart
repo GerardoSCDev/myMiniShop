@@ -15,6 +15,11 @@ class AppColors {
 
   static Color get navBarTitle => _AppSolidColors().black;
 
+  static Color get appTextFieldBorder => _AppSolidColors().primary;
+  static Color get appTextFieldBackground => _AppSolidColors().white;
+  static Color get appTextFieldText => _AppSolidColors().black;
+  static Color get appTextFieldHint => _AppSolidColors().gray;
+
   static RadialGradient get bgPageRadialGradient =>
       _AppRadialGradients().primary;
 }

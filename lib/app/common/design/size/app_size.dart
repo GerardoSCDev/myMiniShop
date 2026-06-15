@@ -1,10 +1,25 @@
 class AppSize {
-  static final double lgPadding = 20;
-  static final double mdPadding = 16;
-  static final double smPadding = 12;
-  static final double xsPadding = 8;
+  /// Padding grande: 20 px
+  static const double lgPadding = 20;
 
-  static final double lgText = 24;
-  static final double mdText = 18;
-  static final double smText = 12;
+  /// Padding mediano: 16 px
+  static const double mdPadding = 16;
+
+  /// Padding pequeño: 12 px
+  static const double smPadding = 12;
+
+  /// Padding extra pequeño: 8 px
+  static const double xsPadding = 8;
+
+  /// Texto grande: 24 px
+  static const double lgText = 24;
+
+  /// Texto mediano: 18 px
+  static const double mdText = 18;
+
+  /// Texto pequeño: 12 px
+  static const double smText = 12;
+
+  /// Border width: 2 px
+  static const double borderWidth = 2;
 }

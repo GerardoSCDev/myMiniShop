@@ -27,7 +27,7 @@ class PrivacyScreen extends StatelessWidget {
 
         Spacer(),
 
-        successButton(),
+        successButton(context),
 
         declineButton(context),
       ],
