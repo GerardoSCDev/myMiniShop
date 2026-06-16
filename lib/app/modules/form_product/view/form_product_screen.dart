@@ -21,6 +21,10 @@ class FormProductScreen extends StatelessWidget {
                   child: AppTextField(
                     label: FormProductCopies.barcodeLabel,
                     hint: FormProductCopies.barcodeHint,
+                    suffixButtonIcon: Icons.barcode_reader,
+                    onSuffixButtonPressed: () {
+                      // acción del botón
+                    },
                   ),
                 ),
               ],
