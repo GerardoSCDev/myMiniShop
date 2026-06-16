@@ -15,7 +15,7 @@ class AppTextField extends StatelessWidget {
     super.key,
     required this.label,
     required this.hint,
-    required this.helperText,
+    this.helperText = '',
     this.controller,
     this.keyboardType = TextInputType.text,
     this.onChanged,
@@ -74,13 +74,14 @@ class AppTextField extends StatelessWidget {
           ),
         ),
 
-        SizedBox(height: AppSize.xsPadding),
-
-        AppText(
-          text: helperText,
-          fontSize: TextFontSize.small,
-          fontWeight: TextWeight.normal,
-        ),
+        if (helperText.isNotEmpty) ...[
+          SizedBox(height: AppSize.xsPadding),
+          AppText(
+            text: helperText,
+            fontSize: TextFontSize.small,
+            fontWeight: TextWeight.normal,
+          ),
+        ],
       ],
     );
   }

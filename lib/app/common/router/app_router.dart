@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:my_mini_shop/app/modules/form_product/view/form_product_screen.dart';
 import 'package:my_mini_shop/app/modules/privacy/view/privacy_screen.dart';
 import 'package:my_mini_shop/app/modules/register_user/view/register_user_screen.dart';
 import 'package:my_mini_shop/app/modules/wellcome/view/wellcome_screen.dart';
@@ -9,6 +10,7 @@ class AppRouter {
       WellcomRouter._route,
       PrivacyRouter._route,
       RegisterUserRouter._route,
+      FormProductRouter._route,
     ],
   );
 }
@@ -34,5 +36,13 @@ class RegisterUserRouter {
   static final GoRoute _route = GoRoute(
     path: path,
     builder: (context, state) => RegisterUserScreen(),
+  );
+}
+
+class FormProductRouter {
+  static String path = '/form-product';
+  static final GoRoute _route = GoRoute(
+    path: path,
+    builder: (context, state) => FormProductScreen(),
   );
 }

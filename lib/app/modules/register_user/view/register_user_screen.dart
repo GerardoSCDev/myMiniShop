@@ -24,7 +24,7 @@ class RegisterUserScreen extends StatelessWidget {
 
           Spacer(),
 
-          successButton(),
+          successButton(context),
         ],
       ),
     );
