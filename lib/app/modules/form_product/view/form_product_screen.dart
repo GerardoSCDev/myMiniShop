@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_mini_shop/app/common/design/colors/app_colors.dart';
 import 'package:my_mini_shop/app/common/design/size/app_size.dart';
 import 'package:my_mini_shop/app/common/design/widgets/app_button/app_button.dart';
@@ -9,8 +12,15 @@ import 'package:my_mini_shop/app/common/design/widgets/app_text/app_text.dart';
 import 'package:my_mini_shop/app/common/design/widgets/app_text_field/app_text_field.dart';
 import 'package:my_mini_shop/app/modules/form_product/config/form_product_copies.dart';
 
-class FormProductScreen extends StatelessWidget {
+class FormProductScreen extends StatefulWidget {
   const FormProductScreen({super.key});
+
+  @override
+  State<FormProductScreen> createState() => _FormProductScreenState();
+}
+
+class _FormProductScreenState extends State<FormProductScreen> {
+  XFile? _selectedImage;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +52,13 @@ class FormProductScreen extends StatelessWidget {
                   SizedBox(height: AppSize.lgPadding),
                   AppImageUploader(
                     title: FormProductCopies.productImageLabel,
-                    onTap: () {
-                      // Abrir selector de imagen
+                    image: _selectedImage == null
+                        ? null
+                        : FileImage(File(_selectedImage!.path)),
+                    onImageSelected: (image) {
+                      setState(() {
+                        _selectedImage = image;
+                      });
                     },
                   ),
                   SizedBox(height: AppSize.lgPadding),

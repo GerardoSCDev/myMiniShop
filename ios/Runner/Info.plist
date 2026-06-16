@@ -26,6 +26,10 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>La app necesita acceder a la cámara para tomar fotografías de productos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>La app necesita acceder a la galería para seleccionar fotografías de productos.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

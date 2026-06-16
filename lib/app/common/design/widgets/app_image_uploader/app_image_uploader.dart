@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_mini_shop/app/common/design/widgets/app_text/app_text.dart';
 
 class AppImageUploader extends StatelessWidget {
   final String title;
-  final VoidCallback onTap;
+  final ValueChanged<XFile> onImageSelected;
   final ImageProvider? image;
 
   const AppImageUploader({
     super.key,
-    required this.onTap,
+    required this.onImageSelected,
     this.title = '',
     this.image,
   });
@@ -16,6 +17,26 @@ class AppImageUploader extends StatelessWidget {
   static const Color green = Color(0xFF007A4D);
   static const Color borderColor = Color(0xFFB5C4B6);
   static const Color bgColor = Color(0xFFEFF3F8);
+
+  Future<void> _openImageSourceSheet(BuildContext context) async {
+    final source = await showModalBottomSheet<ImageSource>(
+      context: context,
+      backgroundColor: Colors.white,
+      builder: (context) => const _ImageSourceSheet(),
+    );
+
+    if (source == null) return;
+
+    final picker = ImagePicker();
+    final selectedImage = await picker.pickImage(
+      source: source,
+      imageQuality: 85,
+    );
+
+    if (selectedImage == null) return;
+
+    onImageSelected(selectedImage);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +50,7 @@ class AppImageUploader extends StatelessWidget {
         ),
         const SizedBox(height: 14),
         GestureDetector(
-          onTap: onTap,
+          onTap: () => _openImageSourceSheet(context),
           child: CustomPaint(
             painter: DashedRoundedBorderPainter(
               color: borderColor,
@@ -56,6 +77,40 @@ class AppImageUploader extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ImageSourceSheet extends StatelessWidget {
+  const _ImageSourceSheet();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo_camera_outlined),
+              title: const AppText(
+                text: 'Abrir cámara',
+                fontWeight: TextWeight.semiBold,
+              ),
+              onTap: () => Navigator.pop(context, ImageSource.camera),
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_library_outlined),
+              title: const AppText(
+                text: 'Abrir galería',
+                fontWeight: TextWeight.semiBold,
+              ),
+              onTap: () => Navigator.pop(context, ImageSource.gallery),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
