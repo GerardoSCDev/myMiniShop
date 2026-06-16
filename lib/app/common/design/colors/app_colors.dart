@@ -18,7 +18,7 @@ class AppColors {
   static Color get appTextFieldBorder => _AppSolidColors().primary;
   static Color get appTextFieldBackground => _AppSolidColors().white;
   static Color get appTextFieldText => _AppSolidColors().black;
-  static Color get appTextFieldHint => _AppSolidColors().gray;
+  static Color get appTextFieldHint => _AppSolidColors().gray.withAlpha(100);
 
   static Color get bgAppCardContainer =>
       _AppSolidColors().primary.withAlpha(40);
