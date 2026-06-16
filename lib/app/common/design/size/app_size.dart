@@ -11,11 +11,11 @@ class AppSize {
   /// Padding extra pequeño: 8 px
   static const double xsPadding = 8;
 
-  /// Texto grande: 24 px
-  static const double lgText = 24;
+  /// Texto grande: 22 px
+  static const double lgText = 22;
 
-  /// Texto mediano: 18 px
-  static const double mdText = 18;
+  /// Texto mediano: 16 px
+  static const double mdText = 16;
 
   /// Texto pequeño: 12 px
   static const double smText = 12;
