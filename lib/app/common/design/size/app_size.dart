@@ -1,4 +1,7 @@
 class AppSize {
+  /// Padding grande: 24 px
+  static const double xlPadding = 24;
+
   /// Padding grande: 20 px
   static const double lgPadding = 20;
 

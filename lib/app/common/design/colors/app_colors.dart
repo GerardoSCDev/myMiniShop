@@ -20,6 +20,9 @@ class AppColors {
   static Color get appTextFieldText => _AppSolidColors().black;
   static Color get appTextFieldHint => _AppSolidColors().gray;
 
+  static Color get bgAppCardContainer =>
+      _AppSolidColors().primary.withAlpha(40);
+
   static RadialGradient get bgPageRadialGradient =>
       _AppRadialGradients().primary;
 }
