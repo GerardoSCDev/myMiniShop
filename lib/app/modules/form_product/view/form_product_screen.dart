@@ -11,6 +11,7 @@ import 'package:my_mini_shop/app/common/design/widgets/app_scaffold/app_scaffold
 import 'package:my_mini_shop/app/common/design/widgets/app_text/app_text.dart';
 import 'package:my_mini_shop/app/common/design/widgets/app_text_field/app_text_field.dart';
 import 'package:my_mini_shop/app/modules/form_product/config/form_product_copies.dart';
+import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 class FormProductScreen extends StatefulWidget {
   const FormProductScreen({super.key});
@@ -41,8 +42,20 @@ class _FormProductScreenState extends State<FormProductScreen> {
                             label: FormProductCopies.barcodeLabel,
                             hint: FormProductCopies.barcodeHint,
                             suffixButtonIcon: Icons.barcode_reader,
-                            onSuffixButtonPressed: () {
-                              // acción del botón
+                            onSuffixButtonPressed: () async {
+                              SimpleBarcodeScanner.streamBarcode(
+                                context,
+                                barcodeAppBar: const BarcodeAppBar(
+                                  appBarTitle: 'Test',
+                                  centerTitle: false,
+                                  enableBackButton: true,
+                                  backButtonIcon: Icon(Icons.arrow_back_ios),
+                                ),
+                                isShowFlashIcon: true,
+                                delayMillis: 2000,
+                              ).listen((event) {
+                                print("Stream Barcode Result: $event");
+                              });
                             },
                           ),
                         ),
