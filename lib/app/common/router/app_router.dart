@@ -1,4 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_mini_shop/app/modules/form_product/cubit/form_products_cubit.dart';
 import 'package:my_mini_shop/app/modules/form_product/view/form_product_screen.dart';
 import 'package:my_mini_shop/app/modules/privacy/view/privacy_screen.dart';
 import 'package:my_mini_shop/app/modules/register_user/view/register_user_screen.dart';
@@ -43,6 +45,9 @@ class FormProductRouter {
   static String path = '/form-product';
   static final GoRoute _route = GoRoute(
     path: path,
-    builder: (context, state) => FormProductScreen(),
+    builder: (context, state) => BlocProvider(
+      create: (_) => FormProductsCubit(),
+      child: FormProductScreen(),
+    ),
   );
 }

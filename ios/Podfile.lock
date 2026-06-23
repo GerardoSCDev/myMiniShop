@@ -1,0 +1,51 @@
+PODS:
+  - barcode_scanner (1.0.0):
+    - Flutter
+    - ScanbotBarcodeSDKNativeWrapper (= 8.0.1.1)
+  - Flutter (1.0.0)
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - permission_handler_apple (9.4.8):
+    - Flutter
+  - ScanbotBarcodeScannerSDK (8.0.1)
+  - ScanbotBarcodeSDKNativeWrapper (8.0.1.1):
+    - ScanbotBarcodeScannerSDK (= 8.0.1)
+  - simple_barcode_scanner (0.1.7):
+    - Flutter
+
+DEPENDENCIES:
+  - barcode_scanner (from `.symlinks/plugins/barcode_scanner/ios`)
+  - Flutter (from `Flutter`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - simple_barcode_scanner (from `.symlinks/plugins/simple_barcode_scanner/ios`)
+
+SPEC REPOS:
+  trunk:
+    - ScanbotBarcodeScannerSDK
+    - ScanbotBarcodeSDKNativeWrapper
+
+EXTERNAL SOURCES:
+  barcode_scanner:
+    :path: ".symlinks/plugins/barcode_scanner/ios"
+  Flutter:
+    :path: Flutter
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+  simple_barcode_scanner:
+    :path: ".symlinks/plugins/simple_barcode_scanner/ios"
+
+SPEC CHECKSUMS:
+  barcode_scanner: b63fec82521c66be47144354972ae4cc1448ce1b
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  image_picker_ios: e0ece4aa2a75771a7de3fa735d26d90817041326
+  permission_handler_apple: 92d754bbaa7361d436db2d6c3c1c2a0fdcec462e
+  ScanbotBarcodeScannerSDK: c0270115558662cc6af89991d79f724848fd480f
+  ScanbotBarcodeSDKNativeWrapper: 307bbacd4b52ad8f3714976050d3e7b724eed4e7
+  simple_barcode_scanner: f1217b91fbad5848d37fa6d794f443416fd3e44d
+
+PODFILE CHECKSUM: 3c63482e143d1b91d2d2560aee9fb04ecc74ac7e
+
+COCOAPODS: 1.16.2
