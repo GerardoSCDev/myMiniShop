@@ -1,18 +1,16 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_mini_shop/app/common/design/colors/app_colors.dart';
 import 'package:my_mini_shop/app/common/design/size/app_size.dart';
-import 'package:my_mini_shop/app/common/design/widgets/app_button/app_button.dart';
-import 'package:my_mini_shop/app/common/design/widgets/app_card_container/app_card_container.dart';
-import 'package:my_mini_shop/app/common/design/widgets/app_image_uploader/app_image_uploader.dart';
 import 'package:my_mini_shop/app/common/design/widgets/app_scaffold/app_scaffold.dart';
-import 'package:my_mini_shop/app/common/design/widgets/app_text/app_text.dart';
-import 'package:my_mini_shop/app/common/design/widgets/app_text_field/app_text_field.dart';
 import 'package:my_mini_shop/app/modules/form_product/config/form_product_copies.dart';
 import 'package:my_mini_shop/app/modules/form_product/cubit/form_products_cubit.dart';
 import 'package:my_mini_shop/app/modules/form_product/cubit/form_products_state.dart';
+import 'package:my_mini_shop/app/modules/form_product/view/widgets/form_product_barcode_field.dart';
+import 'package:my_mini_shop/app/modules/form_product/view/widgets/form_product_details_card.dart';
+import 'package:my_mini_shop/app/modules/form_product/view/widgets/form_product_image_uploader.dart';
+import 'package:my_mini_shop/app/modules/form_product/view/widgets/form_product_save_button.dart';
+import 'package:my_mini_shop/app/modules/form_product/view/widgets/form_product_stock_notifications_card.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
 class FormProductScreen extends StatefulWidget {
@@ -54,6 +52,12 @@ class _FormProductScreenState extends State<FormProductScreen> {
   @override
   void dispose() {
     _barcodeController.dispose();
+    _productNameController.dispose();
+    _categoryController.dispose();
+    _costPriceController.dispose();
+    _salesPriceController.dispose();
+    _initStockController.dispose();
+    _lowStockController.dispose();
     super.dispose();
   }
 
@@ -95,27 +99,13 @@ class _FormProductScreenState extends State<FormProductScreen> {
                 padding: const EdgeInsets.only(bottom: AppSize.lgPadding),
                 child: Column(
                   children: [
-                    AppCardContainer(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: AppTextField(
-                              controller: _barcodeController,
-                              label: FormProductCopies.barcodeLabel,
-                              hint: FormProductCopies.barcodeHint,
-                              suffixButtonIcon: Icons.barcode_reader,
-                              onSuffixButtonPressed: _scanBarcode,
-                            ),
-                          ),
-                        ],
-                      ),
+                    formProductBarcodeField(
+                      controller: _barcodeController,
+                      onScanPressed: _scanBarcode,
                     ),
                     SizedBox(height: AppSize.lgPadding),
-                    AppImageUploader(
-                      title: FormProductCopies.productImageLabel,
-                      image: _selectedImage == null
-                          ? null
-                          : FileImage(File(_selectedImage!.path)),
+                    formProductImageUploader(
+                      selectedImage: _selectedImage,
                       onImageSelected: (image) {
                         setState(() {
                           _selectedImage = image;
@@ -123,109 +113,22 @@ class _FormProductScreenState extends State<FormProductScreen> {
                       },
                     ),
                     SizedBox(height: AppSize.lgPadding),
-                    AppCardContainer(
-                      child: Column(
-                        spacing: AppSize.smPadding,
-                        children: [
-                          AppTextField(
-                            controller: _productNameController,
-                            label: FormProductCopies.productNameLabel,
-                            hint: FormProductCopies.productNameHint,
-                            onChanged: cubit.productNameChanged,
-                          ),
-                          AppTextField(
-                            controller: _categoryController,
-                            label: FormProductCopies.categoryLabel,
-                            hint: FormProductCopies.categoryHint,
-                            onChanged: cubit.categoryChanged,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: AppTextField(
-                                  controller: _costPriceController,
-                                  label: FormProductCopies.costPriceLabel,
-                                  hint: FormProductCopies.priceHint,
-                                  onChanged: cubit.constPriceChanged,
-                                ),
-                              ),
-                              SizedBox(
-                                width: AppSize.smPadding,
-                              ),
-                              Expanded(
-                                child: AppTextField(
-                                  controller: _salesPriceController,
-                                  label: FormProductCopies.salePriceLabel,
-                                  hint: FormProductCopies.priceHint,
-                                  onChanged: cubit.salesPriceChanged,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: AppTextField(
-                                  controller: _initStockController,
-                                  label: FormProductCopies.initialStockLabel,
-                                  hint: FormProductCopies.initialStockHint,
-                                  onChanged: cubit.initStockChanged,
-                                ),
-                              ),
-                              SizedBox(
-                                width: AppSize.smPadding,
-                              ),
-                              Expanded(
-                                child: AppTextField(
-                                  controller: _lowStockController,
-                                  label: FormProductCopies.lowStockAlertLabel,
-                                  hint: FormProductCopies.lowStockAlertHint,
-                                  suffixButtonIcon: Icons.info_outline_rounded,
-                                  onChanged: cubit.lowStockChanged,
-                                  onSuffixButtonPressed: () {
-                                    // acción del botón
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                    formProductDetailsCard(
+                      productNameController: _productNameController,
+                      categoryController: _categoryController,
+                      costPriceController: _costPriceController,
+                      salesPriceController: _salesPriceController,
+                      initStockController: _initStockController,
+                      lowStockController: _lowStockController,
+                      cubit: cubit,
                     ),
                     SizedBox(height: AppSize.lgPadding),
-                    AppCardContainer(
-                      backgroundColor: AppColors.bgAppCardContainer,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                AppText(
-                                  text:
-                                      FormProductCopies.stockNotificationsTitle,
-                                  fontWeight: TextWeight.semiBold,
-                                ),
-                                AppText(
-                                  text: FormProductCopies
-                                      .stockNotificationsDescription,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    formProductStockNotificationsCard(),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: AppSize.xlPadding),
-              child: AppButton(
-                text: FormProductCopies.saveButton,
-                onPressed: cubit.saveProduct,
-              ),
-            ),
+            formProductSaveButton(onPressed: cubit.saveProduct),
           ],
         ),
       ),
