@@ -25,9 +25,11 @@ class PrivacyScreen extends StatelessWidget {
 
           containerPoints(),
 
+          SizedBox(height: AppSize.lgPadding),
+
           checkAcceptTerms(),
 
-          SizedBox(height: AppSize.lgPadding),
+          SizedBox(height: AppSize.xlPadding),
 
           successButton(context),
 
