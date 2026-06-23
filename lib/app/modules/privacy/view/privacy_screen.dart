@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_mini_shop/app/common/design/size/app_size.dart';
 import 'package:my_mini_shop/app/common/design/widgets/app_scaffold/app_scaffold.dart';
 import 'package:my_mini_shop/app/modules/privacy/view/widgets/privacy_check_accept_terms.dart';
 import 'package:my_mini_shop/app/modules/privacy/view/widgets/privacy_decline_button.dart';
@@ -13,26 +14,27 @@ class PrivacyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bodyScreen = Column(
-      children: [
-        imageHeader(context),
+    final bodyScreen = SingleChildScrollView(
+      child: Column(
+        children: [
+          imageHeader(context),
 
-        title(),
+          title(),
 
-        description(),
+          description(),
 
-        containerPoints(),
+          containerPoints(),
 
-        checkAcceptTerms(),
+          checkAcceptTerms(),
 
-        Spacer(),
+          SizedBox(height: AppSize.lgPadding),
 
-        successButton(context),
+          successButton(context),
 
-        declineButton(context),
-      ],
+          declineButton(context),
+        ],
+      ),
     );
-
     return AppScaffold(body: bodyScreen);
   }
 }
