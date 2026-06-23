@@ -86,9 +86,16 @@ class _FormProductScreenState extends State<FormProductScreen> {
     final cubit = context.read<FormProductsCubit>();
     return BlocListener<FormProductsCubit, FormProductsState>(
       listenWhen: (previous, current) =>
-          previous.barcodeText != current.barcodeText,
+          previous.barcodeText != current.barcodeText ||
+          previous.productName != current.productName,
       listener: (context, state) {
-        _barcodeController.text = state.barcodeText;
+        if (_barcodeController.text != state.barcodeText) {
+          _barcodeController.text = state.barcodeText;
+        }
+
+        if (_productNameController.text != state.productName) {
+          _productNameController.text = state.productName;
+        }
       },
       child: AppScaffold(
         titleAppBar: FormProductCopies.title,

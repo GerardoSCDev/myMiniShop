@@ -1,11 +1,20 @@
-import 'package:my_mini_shop/app/modules/form_product/cubit/form_products_state.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_mini_shop/app/common/network/manager/network_result.dart';
+import 'package:my_mini_shop/app/common/network/services/open_food_facs/open_food_facts_repository.dart';
+import 'package:my_mini_shop/app/modules/form_product/cubit/form_products_state.dart';
 
 class FormProductsCubit extends Cubit<FormProductsState> {
-  FormProductsCubit() : super(FormProductsState.initial());
+  FormProductsCubit({
+    required OpenFoodFactsRepository openFoodFactsRepository,
+  }) : _openFoodFactsRepository = openFoodFactsRepository,
+       super(FormProductsState.initial());
+
+  final OpenFoodFactsRepository _openFoodFactsRepository;
 
   void searchProduct(String barcode) {
     emit(state.copyWith(barcodeText: barcode));
+    _getProducts();
   }
 
   void productNameChanged(String text) {
@@ -33,6 +42,32 @@ class FormProductsCubit extends Cubit<FormProductsState> {
   }
 
   void saveProduct() {
-    print(state);
+    debugPrint(state.toString());
+  }
+
+  Future<void> _getProducts() async {
+    final barcode = state.barcodeText.trim();
+
+    if (barcode.isEmpty) return;
+
+    emit(state.copyWith(isLoadSearchProducts: true));
+
+    final result = await _openFoodFactsRepository.getProductByBarcode(
+      barcode: barcode,
+    );
+
+    switch (result) {
+      case NetworkSuccess(data: final data):
+        print(data.productName);
+        emit(
+          state.copyWith(
+            isLoadSearchProducts: false,
+            productName: data.productName,
+          ),
+        );
+      case NetworkFailure():
+        print('ERROR');
+        emit(state.copyWith(isLoadSearchProducts: false));
+    }
   }
 }

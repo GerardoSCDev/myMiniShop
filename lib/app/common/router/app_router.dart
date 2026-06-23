@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_mini_shop/app/common/network/services/open_food_facs/open_food_facts_client.dart';
+import 'package:my_mini_shop/app/common/network/services/open_food_facs/open_food_facts_repository.dart';
 import 'package:my_mini_shop/app/modules/form_product/cubit/form_products_cubit.dart';
 import 'package:my_mini_shop/app/modules/form_product/view/form_product_screen.dart';
 import 'package:my_mini_shop/app/modules/privacy/view/privacy_screen.dart';
@@ -46,7 +48,11 @@ class FormProductRouter {
   static final GoRoute _route = GoRoute(
     path: path,
     builder: (context, state) => BlocProvider(
-      create: (_) => FormProductsCubit(),
+      create: (_) => FormProductsCubit(
+        openFoodFactsRepository: OpenFoodFactsRepository(
+          client: OpenFoodFactsClient(),
+        ),
+      ),
       child: FormProductScreen(),
     ),
   );

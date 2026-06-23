@@ -6,7 +6,7 @@ import 'package:my_mini_shop/app/common/network/services/open_food_facs/end_poin
 class GetProductEndPoint extends ApiEndpoint<GetProductResponse> {
   GetProductEndPoint({required String barcode})
     : super(
-        path: '',
+        path: '/api/v2/product/$barcode.json',
         method: HttpMethod.get,
         headers: DefaultApiHeaders(),
         mapper: (json) =>
