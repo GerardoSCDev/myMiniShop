@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,12 +25,29 @@ class FormProductScreen extends StatefulWidget {
 class _FormProductScreenState extends State<FormProductScreen> {
   XFile? _selectedImage;
   late final TextEditingController _barcodeController;
+  late final TextEditingController _productNameController;
+  late final TextEditingController _categoryController;
+  late final TextEditingController _costPriceController;
+  late final TextEditingController _salesPriceController;
+  late final TextEditingController _initStockController;
+  late final TextEditingController _lowStockController;
 
   @override
   void initState() {
     super.initState();
+    final state = context.read<FormProductsCubit>().state;
     _barcodeController = TextEditingController(
-      text: context.read<FormProductsCubit>().state.barcodeText,
+      text: state.barcodeText,
+    );
+    _productNameController = TextEditingController(text: state.productName);
+    _categoryController = TextEditingController(text: state.category);
+    _costPriceController = TextEditingController(text: state.constPrice);
+    _salesPriceController = TextEditingController(text: state.salesPrice);
+    _initStockController = TextEditingController(
+      text: state.initStock.toString(),
+    );
+    _lowStockController = TextEditingController(
+      text: state.lowStock.toString(),
     );
   }
 
@@ -63,6 +79,7 @@ class _FormProductScreenState extends State<FormProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<FormProductsCubit>();
     return BlocListener<FormProductsCubit, FormProductsState>(
       listenWhen: (previous, current) =>
           previous.barcodeText != current.barcodeText,
@@ -111,19 +128,25 @@ class _FormProductScreenState extends State<FormProductScreen> {
                         spacing: AppSize.smPadding,
                         children: [
                           AppTextField(
+                            controller: _productNameController,
                             label: FormProductCopies.productNameLabel,
                             hint: FormProductCopies.productNameHint,
+                            onChanged: cubit.productNameChanged,
                           ),
                           AppTextField(
+                            controller: _categoryController,
                             label: FormProductCopies.categoryLabel,
                             hint: FormProductCopies.categoryHint,
+                            onChanged: cubit.categoryChanged,
                           ),
                           Row(
                             children: [
                               Expanded(
                                 child: AppTextField(
+                                  controller: _costPriceController,
                                   label: FormProductCopies.costPriceLabel,
                                   hint: FormProductCopies.priceHint,
+                                  onChanged: cubit.constPriceChanged,
                                 ),
                               ),
                               SizedBox(
@@ -131,8 +154,10 @@ class _FormProductScreenState extends State<FormProductScreen> {
                               ),
                               Expanded(
                                 child: AppTextField(
+                                  controller: _salesPriceController,
                                   label: FormProductCopies.salePriceLabel,
                                   hint: FormProductCopies.priceHint,
+                                  onChanged: cubit.salesPriceChanged,
                                 ),
                               ),
                             ],
@@ -141,8 +166,10 @@ class _FormProductScreenState extends State<FormProductScreen> {
                             children: [
                               Expanded(
                                 child: AppTextField(
+                                  controller: _initStockController,
                                   label: FormProductCopies.initialStockLabel,
                                   hint: FormProductCopies.initialStockHint,
+                                  onChanged: cubit.initStockChanged,
                                 ),
                               ),
                               SizedBox(
@@ -150,9 +177,11 @@ class _FormProductScreenState extends State<FormProductScreen> {
                               ),
                               Expanded(
                                 child: AppTextField(
+                                  controller: _lowStockController,
                                   label: FormProductCopies.lowStockAlertLabel,
                                   hint: FormProductCopies.lowStockAlertHint,
                                   suffixButtonIcon: Icons.info_outline_rounded,
+                                  onChanged: cubit.lowStockChanged,
                                   onSuffixButtonPressed: () {
                                     // acción del botón
                                   },
@@ -192,7 +221,10 @@ class _FormProductScreenState extends State<FormProductScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppSize.xlPadding),
-              child: AppButton(text: FormProductCopies.saveButton),
+              child: AppButton(
+                text: FormProductCopies.saveButton,
+                onPressed: cubit.saveProduct,
+              ),
             ),
           ],
         ),
