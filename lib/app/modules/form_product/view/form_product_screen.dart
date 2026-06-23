@@ -107,6 +107,7 @@ class _FormProductScreenState extends State<FormProductScreen> {
                 child: Column(
                   children: [
                     formProductBarcodeField(
+                      context: context,
                       controller: _barcodeController,
                       onScanPressed: _scanBarcode,
                     ),

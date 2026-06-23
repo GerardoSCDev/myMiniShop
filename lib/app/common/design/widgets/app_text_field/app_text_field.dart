@@ -10,6 +10,7 @@ class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
   final IconData? suffixButtonIcon;
   final VoidCallback? onSuffixButtonPressed;
 
@@ -21,6 +22,7 @@ class AppTextField extends StatelessWidget {
     this.controller,
     this.keyboardType = TextInputType.text,
     this.onChanged,
+    this.onSubmitted,
     this.suffixButtonIcon,
     this.onSuffixButtonPressed,
   });
@@ -42,6 +44,7 @@ class AppTextField extends StatelessWidget {
           controller: controller,
           keyboardType: keyboardType,
           onChanged: onChanged,
+          onSubmitted: onSubmitted,
           style: TextStyle(
             fontSize: AppSize.mdText,
             color: AppColors.appTextFieldText,
